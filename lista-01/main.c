@@ -2,7 +2,7 @@
 #include <locale.h>
 
 int primeiro_ex();
-int segundo_ex()
+int segundo_ex();
 
 
 int main(int argc, char* argv[]) {
