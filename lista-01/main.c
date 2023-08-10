@@ -3,7 +3,7 @@
 
 int primeiro_ex();
 int segundo_ex();
-
+int terceiro_ex();
 
 int main(int argc, char* argv[]) {
     printf("Bem vindo!\n");
@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
                 break;
             case 2: segundo_ex();
                 break;
-            case 3:;
+            case 3: terceiro_ex();
                 break;
             case 4:;
                 break;
