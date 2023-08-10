@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <locale.h>
+#include "exercicio_1.h"
+
+ int primeiro_ex();
 
 int main(int argc, char* argv[]) {
     printf("Bem vindo!\n");
@@ -7,6 +10,7 @@ int main(int argc, char* argv[]) {
     setlocale(LC_ALL, "Portuguese");
 
     do {
+        printf("Menu:\n");
         printf("1- Encontrar o maior valor\n");
         printf("2- Sorteie um número de forma pseudo aleatória\n");
         printf("3- Informar números pares e impares\n");
@@ -20,7 +24,7 @@ int main(int argc, char* argv[]) {
         scanf("%d", &escolha);
 
         switch (escolha) {
-            case 1:;
+            case 1: primeiro_ex();
                 break;
             case 2:;
                 break;
