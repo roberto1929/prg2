@@ -11,9 +11,9 @@
 int segundo_ex(void) {
     int numeroSorteado, numeroUsuario;
 
-    /* Iniciando a semente pseudo aleatória */
+
     srand((unsigned)time(NULL));
-    numeroSorteado = rand() % 10 + 1; /* Fazendo o sorteio entre 1 e 10 */
+    numeroSorteado = rand() % 10 + 1;
 
     printf("Digite um número entre 1 e 10: ");
     scanf("%d", &numeroUsuario);
