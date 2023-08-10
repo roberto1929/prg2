@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <locale.h>
 
-
- int primeiro_ex();
+int primeiro_ex();
+int segundo_ex()
 
 
 int main(int argc, char* argv[]) {
@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
         switch (escolha) {
             case 1: primeiro_ex();
                 break;
-            case 2: ;
+            case 2: segundo_ex();
                 break;
             case 3:;
                 break;
