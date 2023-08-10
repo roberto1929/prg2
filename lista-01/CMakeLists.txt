@@ -5,4 +5,6 @@ set(CMAKE_C_STANDARD 17)
 
 add_executable(prg2 main.c
         exercicio_1.c
-        exercicio_1.h)
+        exercicio_1.h
+        exercicio_2.c
+        exercicio_2.h)
