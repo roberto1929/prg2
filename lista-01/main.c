@@ -4,6 +4,7 @@
 int primeiro_ex();
 int segundo_ex();
 int terceiro_ex();
+int quarto_ex();
 
 int main(int argc, char* argv[]) {
     printf("Bem vindo!\n");
@@ -31,7 +32,7 @@ int main(int argc, char* argv[]) {
                 break;
             case 3: terceiro_ex();
                 break;
-            case 4:;
+            case 4: quarto_ex();
                 break;
             case 5:;
                 break;
