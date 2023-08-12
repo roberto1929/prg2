@@ -8,6 +8,7 @@ int quarto_ex();
 int quinto_ex();
 int sexto_ex();
 int setimo_ex();
+int oitavo_ex();
 
 int main(int argc, char* argv[]) {
     printf("Bem vindo!\n");
@@ -43,7 +44,7 @@ int main(int argc, char* argv[]) {
                 break;
             case 7: setimo_ex();
                 break;
-            case 8:;
+            case 8: oitavo_ex();
                 break;
             case 0:
                 printf("Saindo do programa.\n");
