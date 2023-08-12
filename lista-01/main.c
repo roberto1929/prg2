@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
                 break;
             case 4: quarto_ex();
                 break;
-            case 5: ;
+            case 5:;
                 break;
             case 6:;
                 break;
