@@ -17,4 +17,6 @@ add_executable(prg2 main.c
         exercicio_6.c
         exercicio_6.h
         exercicio_7.c
-        exercicio_7.h)
+        exercicio_7.h
+        exercicio_8.c
+        exercicio_8.h)
