@@ -4,50 +4,23 @@
 
 #include "exercicio_8.h"
 #include <stdio.h>
-
+#include <ctype.h>
 
 int oitavo_ex() {
-    char frase[1000];
-    int vogais[5] = {0};
+    char frase[100];
+    int contaVogais = 0;
 
-    printf("Digite uma frase: ");
-    scanf("%[^\n]", frase);
+    scanf("%[^\n]s", frase);
 
-    int i = 0;
-    while (frase[i] != '\0') {
-        char c = frase[i];
+    for (int i = 0; frase[i] != '\0'; i++) {
+        char c = tolower(frase[i]);
 
-        if (c >= 'A' && c <= 'Z') {
-            c = c + ('a' - 'A');
+        if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+            contaVogais++;
         }
-
-        switch (c) {
-            case 'a':
-                vogais[0]++;
-                break;
-            case 'e':
-                vogais[1]++;
-                break;
-            case 'i':
-                vogais[2]++;
-                break;
-            case 'o':
-                vogais[3]++;
-                break;
-            case 'u':
-                vogais[4]++;
-                break;
-        }
-
-        i++;
     }
 
-    printf("Quantidade de vezes que cada vogal aparece na frase:\n");
-    printf("a: %d\n", vogais[0]);
-    printf("e: %d\n", vogais[1]);
-    printf("i: %d\n", vogais[2]);
-    printf("o: %d\n", vogais[3]);
-    printf("u: %d\n", vogais[4]);
+    printf("O número de vogais na frase é: %d\n", contaVogais);
 
     return 0;
 }
