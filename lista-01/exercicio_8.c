@@ -10,7 +10,8 @@ int oitavo_ex() {
     char frase[100];
     int contaVogais = 0;
 
-    scanf("%[^\n]s", frase);
+    printf("Digite uma frase: ");
+    scanf("%s", frase);
 
     for (int i = 0; frase[i] != '\0'; i++) {
         char c = tolower(frase[i]);
