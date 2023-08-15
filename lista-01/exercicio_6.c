@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 int sexto_ex() {
-    int matriz[10][10]; // Declarando a matriz 10x10
+    int matriz[10][10]; 
 
 
     for (int i = 0; i < 10; i++) {
