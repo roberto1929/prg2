@@ -12,6 +12,17 @@ void aloca_memoria_pilha(int quantidade){
     printf("zerou memória\n");
 }
 
+void aloca_memoria_heap(int quantidade){
+    int tamanho = quantidade * (1 << 20);
+    char *memoria = calloc(tamanho, sizeof (char ));
+    printf("Vetor do teclado: %d kB\n", tamanho/1024);
+    printf("Endereço da variável tamanho: %p\n", (void*)&tamanho);
+    printf("Distancia entre vetor e tamanho: %ld\n", (((char*)&tamanho-memoria)/1024));
+    bzero(memoria, tamanho);
+    printf("zerou memória\n");
+    free(memoria);
+}
+
 
 
 int mult_ite(int m, int n){
@@ -31,12 +42,8 @@ int mult_rec(int m, int n){
 
 
 int main(int argc, char *argv[]) {
-    if(argc> 0){
+    if(argc> 0)
         aloca_memoria_pilha(strtol(argv[1],NULL, 10));
-    }
-
-
-    printf("%d\n", mult_ite(2,6));
-    printf("%d\n", mult_rec(2,6));
+        aloca_memoria_heap(strtol(argv[1],NULL, 10));
     return 0;
 }
