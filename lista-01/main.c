@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <locale.h>
 
+
 int primeiro_ex();
 int segundo_ex();
 int terceiro_ex();
