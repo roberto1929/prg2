@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
         printf("5- Elemento excluido do vetor.\n");
         printf("6- Matriz de identidade.\n");
         printf("7- Palindromo.\n");
-        printf("8- Contador de vogal (Depois de digitar 8, digite a frase para contar as vogais).\n");
+        printf("8- Contador de vogal.\n");
         printf("0- Sair.\n");
         printf("Escolha uma opção: ");
         scanf("%d", &escolha);
