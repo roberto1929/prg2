@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "fatorial.h"
+
+int fatorial_inte(int n);
 
 void aloca_memoria_pilha(int quantidade){
     int tamanho = quantidade * (1 << 20);
@@ -43,11 +46,13 @@ int mult_rec(int m, int n){
 
 int main(int argc, char *argv[]) {
 
-    if(strcmp(argv[1], "p")){
-        aloca_memoria_pilha(strtol(argv[2],NULL, 10));
-    }
-    if(strcmp(argv[1], "h")){
-        aloca_memoria_heap(strtol(argv[2],NULL, 10));
-    }
+    printf("%d", fatorial_inte(4));
+
+//    if(strcmp(argv[1], "p")){
+//        aloca_memoria_pilha(strtol(argv[2],NULL, 10));
+//    }
+//    if(strcmp(argv[1], "h")){
+//        aloca_memoria_heap(strtol(argv[2],NULL, 10));
+//    }
     return 0;
 }
