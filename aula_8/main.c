@@ -42,8 +42,12 @@ int mult_rec(int m, int n){
 
 
 int main(int argc, char *argv[]) {
-    if(argc> 0)
-        aloca_memoria_pilha(strtol(argv[1],NULL, 10));
-        aloca_memoria_heap(strtol(argv[1],NULL, 10));
+
+    if(strcmp(argv[1], "p")){
+        aloca_memoria_pilha(strtol(argv[2],NULL, 10));
+    }
+    if(strcmp(argv[1], "h")){
+        aloca_memoria_heap(strtol(argv[2],NULL, 10));
+    }
     return 0;
 }
