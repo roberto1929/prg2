@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include "fatorial.h"
 
+#include "fibo_rec.h"
+#include "fibonacci.h"
 int fatorial_inte(int n);
 
 void aloca_memoria_pilha(int quantidade){
@@ -46,7 +48,11 @@ int mult_rec(int m, int n){
 
 int main(int argc, char *argv[]) {
 
-    printf("%d", fatorial_inte(4));
+    //printf("%d\n", fatorial_inte(8));
+        printf("%d\n", fibonacci(8));
+    for (int i = 0; i < 10; ++i) {
+        printf("%d ", fibo_rec(i));
+    }
 
 //    if(strcmp(argv[1], "p")){
 //        aloca_memoria_pilha(strtol(argv[2],NULL, 10));
