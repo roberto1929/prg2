@@ -143,7 +143,7 @@ int main() {
 
             case '7':
                 if (vetor != NULL) {
-                    free(vetor); // Libera a memória do vetor antes de sair
+                    free(vetor); 
                 }
                 exit(0);
 
