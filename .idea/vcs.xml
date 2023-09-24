@@ -2,9 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-<<<<<<< HEAD
-=======
-    <mapping directory="$PROJECT_DIR$/Aula - analise de algoritos" vcs="Git" />
->>>>>>> 79fdc8b95bb79fc80e3eb40ffa08f0e072455166
   </component>
 </project>
