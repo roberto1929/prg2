@@ -2,156 +2,96 @@
 #include <stdlib.h>
 #include <libprg/libprg.h>
 #include <time.h>
-#include <sys/time.h>
-
-void medir_tempo_inicio(struct timeval *tempo) {
-    gettimeofday(tempo, NULL);
-}
-
-void medir_tempo_fim(struct timeval *tempo, double *tempo_total) {
-    struct timeval fim;
-    gettimeofday(&fim, NULL);
-
-    long seg = fim.tv_sec - tempo->tv_sec;
-    long mseg = fim.tv_usec - tempo->tv_usec;
-    *tempo_total = seg + mseg * 1e-6;
-}
 
 int main() {
-    int *vetor = NULL;
-    int total = 0;
-    int tamanho = 0;
-    char opcao;
+    ListaLinear lista;
+    int opcao, n, elemento;
 
-    struct timeval inicio, fim;
-    double tempo_total;
+    inicializarLista(&lista, 100); // Tamanho máximo da lista é 100
 
-    while (1) {
-        printf("\nMenu:\n");
-        printf("1. Criar uma lista povoada\n");
+    do {
+        printf("MENU:\n");
+        printf("1. Criar uma lista povoada de tamanho n\n");
         printf("2. Inserir um novo número\n");
         printf("3. Remover um número\n");
         printf("4. Buscar por um número usando busca linear\n");
         printf("5. Buscar por um número usando busca binária iterativa\n");
         printf("6. Buscar por um número usando busca binária recursiva\n");
-        printf("7. Sair\n");
+        printf("0. Sair\n");
         printf("Escolha uma opção: ");
-        scanf(" %c", &opcao);
+        scanf("%d", &opcao);
 
         switch (opcao) {
-            case '1':
-                printf("Informe o tamanho da lista: ");
-                scanf("%d", &tamanho);
-                printf("Deseja que a lista seja ordenada (a/d/n)? ");
-                scanf(" %c", &opcao);
-
-                if (vetor != NULL) {
-                    free(vetor);
-                }
-
-                criar_lista(&vetor, tamanho);
-                if (opcao == 'a') {
-                    povoar_ordenada(vetor, tamanho, 'a');
-                } else if (opcao == 'd') {
-                    povoar_ordenada(vetor, tamanho, 'd');
-                } else if (opcao == 'n') {
-                    povoar_nao_ordenada(vetor, tamanho);
-                }
-                total = tamanho;
-                printf("Lista criada e populada.\n");
-                break;
-
-            case '2':
-                if (vetor == NULL) {
-                    printf("A lista não foi criada ainda. Crie uma lista primeiro.\n");
+            case 1:
+                printf("Digite o tamanho da lista: ");
+                scanf("%d", &n);
+                // Escolha se a lista será ordenada ou não
+                printf("A lista será ordenada (1) ou não ordenada (0)? ");
+                int ordenada;
+                scanf("%d", &ordenada);
+                if (ordenada) {
+                    povoarOrdenada(&lista, n, 1000); // Povoar com números aleatórios de 0 a 999
                 } else {
-                    int elemento;
-                    printf("Informe o número a ser inserido: ");
-                    scanf("%d", &elemento);
-
-                    medir_tempo_inicio(&inicio);
-
-                    inserir_ordenada(elemento, vetor, tamanho, &total);
-
-                    medir_tempo_fim(&inicio, &tempo_total);
-                    printf("Número inserido. Tempo gasto: %f segundos.\n", tempo_total);
+                    povoarNaoOrdenada(&lista, n, 1000); // Povoar com números aleatórios de 0 a 999
                 }
                 break;
-
-            case '3':
-                if (vetor == NULL) {
-                    printf("A lista não foi criada ainda. Crie uma lista primeiro.\n");
+            case 2:
+                printf("Digite o número a ser inserido: ");
+                scanf("%d", &elemento);
+                if (ordenada) {
+                    inserirOrdenado(&lista, elemento);
                 } else {
-                    int elemento;
-                    printf("Informe o número a ser removido: ");
-                    scanf("%d", &elemento);
-                    remover(elemento, vetor, &total, tamanho);
-                    printf("Número removido.\n");
+                    inserirNaoOrdenado(&lista, elemento);
                 }
                 break;
-
-            case '4':
-                if (vetor == NULL) {
-                    printf("A lista não foi criada ainda. Crie uma lista primeiro.\n");
+            case 3:
+                printf("Digite o número a ser removido: ");
+                scanf("%d", &elemento);
+                if (ordenada) {
+                    removerOrdenado(&lista, elemento);
                 } else {
-                    int elemento;
-                    printf("Informe o número a ser buscado: ");
-                    scanf("%d", &elemento);
-                    if (busca_linear(elemento, vetor, total, tamanho)) {
-                        printf("Número encontrado.\n");
-                    } else {
-                        printf("Número não encontrado.\n");
-                    }
+                    removerNaoOrdenado(&lista, elemento);
                 }
                 break;
-
-            case '5':
-                if (vetor == NULL) {
-                    printf("A lista não foi criada ainda. Crie uma lista primeiro.\n");
+            case 4:
+                printf("Digite o número a ser buscado: ");
+                scanf("%d", &elemento);
+                int resultado = buscaLinear(&lista, elemento);
+                if (resultado != -1) {
+                    printf("Elemento encontrado no índice %d\n", resultado);
                 } else {
-                    int elemento;
-                    printf("Informe o número a ser buscado: ");
-                    scanf("%d", &elemento);
-                    if (busca_binaria_ite(elemento, vetor, total)) {
-                        printf("Número encontrado.\n");
-                    } else {
-                        printf("Número não encontrado.\n");
-                    }
+                    printf("Elemento não encontrado na lista.\n");
                 }
                 break;
-
-            case '6':
-                if (vetor == NULL) {
-                    printf("A lista não foi criada ainda. Crie uma lista primeiro.\n");
+            case 5:
+                printf("Digite o número a ser buscado: ");
+                scanf("%d", &elemento);
+                resultado = buscaBinariaIterativa(&lista, elemento);
+                if (resultado != -1) {
+                    printf("Elemento encontrado no índice %d\n", resultado);
                 } else {
-                    int elemento;
-                    printf("Informe o número a ser buscado: ");
-                    scanf("%d", &elemento);
-
-                    medir_tempo_inicio(&inicio);
-
-                    if (busca_binaria_rec(elemento, vetor, total, 0, total - 1)) {
-                        printf("Número encontrado.\n");
-                    } else {
-                        printf("Número não encontrado.\n");
-                    }
-
-                    medir_tempo_fim(&inicio, &tempo_total);
-                    printf("Busca binária recursiva concluída. Tempo gasto: %f segundos.\n", tempo_total);
+                    printf("Elemento não encontrado na lista.\n");
                 }
                 break;
-
-            case '7':
-                if (vetor != NULL) {
-                    free(vetor); 
+            case 6:
+                printf("Digite o número a ser buscado: ");
+                scanf("%d", &elemento);
+                resultado = buscaBinariaRecursiva(&lista, elemento, 0, lista.tamanho - 1);
+                if (resultado != -1) {
+                    printf("Elemento encontrado no índice %d\n", resultado);
+                } else {
+                    printf("Elemento não encontrado na lista.\n");
                 }
-                exit(0);
-
+                break;
+            case 0:
+                liberarLista(&lista);
+                break;
             default:
-                printf("Opção inválida.\n");
+                printf("Opção inválida. Tente novamente.\n");
                 break;
         }
-    }
+
+    } while (opcao != 0);
 
     return 0;
 }
