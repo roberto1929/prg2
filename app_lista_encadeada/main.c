@@ -2,7 +2,7 @@
 #include <libprg/libprg.h>
 
 int main() {
-    // Inicializar sua estrutura de dados aqui
+   
 
     int opcao;
     while (1) {
@@ -18,16 +18,16 @@ int main() {
 
         switch (opcao) {
             case 1:
-                // Implementar a criação de estrutura de dados aqui
+           
                 break;
             case 2:
-                // Implementar a inserção de elementos aqui
+               
                 break;
             case 3:
-                // Implementar a remoção de elementos aqui
+                
                 break;
             case 4:
-                // Implementar a busca de elementos aqui
+              
                 break;
             case 5:
                 printf("Saindo...\n");
