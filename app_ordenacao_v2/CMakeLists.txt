@@ -17,5 +17,9 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(libprg)
 
 add_executable(app_ordenacao_v2 main.c
+        relogio_parede.c
+        relogio_parede.h
+        relogio_cpu.c
+        relogio_cpu.h
 )
 target_link_libraries(app_ordenacao_v2 PUBLIC libprg)
