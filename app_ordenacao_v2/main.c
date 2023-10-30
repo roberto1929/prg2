@@ -18,5 +18,15 @@ int main() {
 
     bubble_sort(vetor);
     imprimir(vetor);
+
+    selection_sort(vetor, n);
+    imprimir(vetor);
+
+    insert_sort(vetor, n);
+    imprimir(vetor);
+
+
+
+
     return 0;
 }
