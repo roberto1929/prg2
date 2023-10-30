@@ -10,7 +10,7 @@ int criar_vetor(int vetor[], int tamanho){
     for (int i = 0; i < tamanho; ++i) {
         vetor[i] = rand() % 10 +  1;
     }
-    return  vetor;
+    return *vetor;
 }
 
 

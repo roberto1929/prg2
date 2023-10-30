@@ -25,8 +25,5 @@ int main() {
     insert_sort(vetor, n);
     imprimir(vetor);
 
-
-
-
     return 0;
 }

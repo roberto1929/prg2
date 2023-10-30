@@ -2,7 +2,7 @@
 // Created by aluno on 24/10/23.
 //
 
-#include "relogio_parede.h"
+#include "tomada_tempo.h"
 #include <libprg/libprg.h>
 
 int relogio_parede(int argc, char **argv) {
@@ -21,4 +21,8 @@ int relogio_parede(int argc, char **argv) {
     printf("Tempo gasto: %f segundos.\n", tempo_total);
 
     return 0;
+}
+
+int relogio_cpu(){
+
 }
