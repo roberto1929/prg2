@@ -1,0 +1,1 @@
+./gerar 10 > saida.txt

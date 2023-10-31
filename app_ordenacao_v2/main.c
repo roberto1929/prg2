@@ -12,7 +12,6 @@ int main() {
     int n = 0;
     printf("Entre com o tamanho do vetor: ");
     scanf("%d", &n);
-
     sort_t sort;
 
     printf("Tamanho do vetor: %d\n", n);
@@ -24,6 +23,7 @@ int main() {
 
     imprimir(sort.vetor);
     bubble_sort(&sort);
+    printf("Depois de ordenar:\n");
     imprimir(sort.vetor);
 
 
