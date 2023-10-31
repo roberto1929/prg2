@@ -9,7 +9,7 @@ void imprimir(int *vetor){
 }
 
 int main() {
-    int n;
+    int n = 0;
     printf("Entre com o tamanho do vetor: ");
     scanf("%d", &n);
 
@@ -19,111 +19,76 @@ int main() {
     printf("−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−\n");
     printf("Algoritmo Relógio (seg) CPU (seg)\n");
     printf("------------------------------------\n");
-    sort.vetor = (int *) malloc(n * sizeof(int));
-    if(!sort.vetor){
-        printf("Erro ao alocar memória\n");
-        return 1;
-    }
+
     cria_arranjo(n);
 
-    clock_t start, end;
-    double cpu_time_used;
-    struct timeval inicio, fim;
-    double wall_time_used;
-
-
-    //insertion sort
-    //CPU
-    start = clock();
-    insert_sort(&sort);
-    end = clock();
-    cpu_time_used = ((double )(end - start)) / CLOCKS_PER_SEC;
-    printf("Inserção   %f      ", cpu_time_used);
-
-    //parede
-    gettimeofday(&inicio, 0);
-    insert_sort(&sort);
-    gettimeofday(&fim, 0);
-    long seg = fim.tv_sec - inicio.tv_sec;
-    long mseg = fim.tv_usec - inicio.tv_usec;
-    double tempo_total = seg + mseg * 1e-6;
-    printf("%f\n", tempo_total);
-
-
-
-    // selection sort
-    //CPU
-    start = clock();
-    selection_sort(&sort);
-    end = clock();
-    cpu_time_used= ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("Seleção    %f      ", cpu_time_used);
-    //parede
-    gettimeofday(&inicio, 0);
-    selection_sort(&sort);
-    gettimeofday(&fim, 0);
-    seg = fim.tv_sec - inicio.tv_sec;
-    mseg = fim.tv_usec - inicio.tv_usec;
-    tempo_total = seg + mseg * 1e-6;
-    printf("%f\n", tempo_total);
-
-
-
-    // selection sort
-    //CPU
-    start = clock();
-    selection_sort_d(&sort);
-    end = clock();
-    cpu_time_used= ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("Seleção_d  %f      ", cpu_time_used);
-    //parede
-    gettimeofday(&inicio, 0);
-    selection_sort_d(&sort);
-    gettimeofday(&fim, 0);
-    seg = fim.tv_sec - inicio.tv_sec;
-    mseg = fim.tv_usec - inicio.tv_usec;
-    tempo_total = seg + mseg * 1e-6;
-    printf("%f\n", tempo_total);
-
-
-
-
-    // bubble sort
-    //CPU
-    start = clock();
+    imprimir(sort.vetor);
     bubble_sort(&sort);
-    end = clock();
-    cpu_time_used= ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("Bolha      %f      ", cpu_time_used);
-    //parede
-    gettimeofday(&inicio, 0);
-    bubble_sort(&sort);
-    gettimeofday(&fim, 0);
-    seg = fim.tv_sec - inicio.tv_sec;
-    mseg = fim.tv_usec - inicio.tv_usec;
-    tempo_total = seg + mseg * 1e-6;
-    printf("%f\n", tempo_total);
+    imprimir(sort.vetor);
 
 
-    // bubble sort decrescente
-    //CPU
-    start = clock();
-    bubble_sort_d(&sort);
-    end = clock();
-    cpu_time_used= ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("Bolha_d    %f      ", cpu_time_used);
-    //parede
-    gettimeofday(&inicio, 0);
-    bubble_sort_d(&sort);
-    gettimeofday(&fim, 0);
-    seg = fim.tv_sec - inicio.tv_sec;
-    mseg = fim.tv_usec - inicio.tv_usec;
-    tempo_total = seg + mseg * 1e-6;
-    printf("%f\n", tempo_total);
-
-
-    printf("------------------------------------\n");
-    free(sort.vetor);
+//    clock_t start, end;
+//    double cpu_time_used;
+//    struct timeval inicio, fim;
+//    double wall_time_used;
+//
+//
+//    //insertion sort
+//    //CPU
+//    start = clock();
+//    insert_sort(&sort);
+//    end = clock();
+//    cpu_time_used = ((double )(end - start)) / CLOCKS_PER_SEC;
+//    printf("Inserção   %f      ", cpu_time_used);
+//
+//    //parede
+//    gettimeofday(&inicio, 0);
+//    insert_sort(&sort);
+//    gettimeofday(&fim, 0);
+//    long seg = fim.tv_sec - inicio.tv_sec;
+//    long mseg = fim.tv_usec - inicio.tv_usec;
+//    double tempo_total = seg + mseg * 1e-6;
+//    printf("%f\n", tempo_total);
+//
+//
+//
+//    // selection sort
+//    //CPU
+//    start = clock();
+//    selection_sort(&sort);
+//    end = clock();
+//    cpu_time_used= ((double)(end - start)) / CLOCKS_PER_SEC;
+//    printf("Seleção    %f      ", cpu_time_used);
+//    //parede
+//    gettimeofday(&inicio, 0);
+//    selection_sort(&sort);
+//    gettimeofday(&fim, 0);
+//    seg = fim.tv_sec - inicio.tv_sec;
+//    mseg = fim.tv_usec - inicio.tv_usec;
+//    tempo_total = seg + mseg * 1e-6;
+//    printf("%f\n", tempo_total);
+//
+//
+//
+//    // bubble sort
+//    //CPU
+//    start = clock();
+//    bubble_sort(&sort);
+//    end = clock();
+//    cpu_time_used= ((double)(end - start)) / CLOCKS_PER_SEC;
+//    printf("Bolha      %f      ", cpu_time_used);
+//    //parede
+//    gettimeofday(&inicio, 0);
+//    bubble_sort(&sort);
+//    gettimeofday(&fim, 0);
+//    seg = fim.tv_sec - inicio.tv_sec;
+//    mseg = fim.tv_usec - inicio.tv_usec;
+//    tempo_total = seg + mseg * 1e-6;
+//    printf("%f\n", tempo_total);
+//
+//
+//    printf("------------------------------------\n");
+//    free(sort.vetor);
 
 
     return 0;
