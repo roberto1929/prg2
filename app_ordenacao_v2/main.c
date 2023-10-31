@@ -20,7 +20,7 @@ int main() {
     printf("Algoritmo Relógio (seg) CPU (seg)\n");
     printf("------------------------------------\n");
 
-    cria_arranjo(n);
+    sort.vetor = cria_arranjo(n);
 
     imprimir(sort.vetor);
     bubble_sort(&sort);
