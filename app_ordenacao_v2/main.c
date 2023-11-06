@@ -13,7 +13,7 @@ int main() {
     printf("Entre com o tamanho do vetor: ");
     scanf("%d", &n);
     sort_t sort;
-
+    sort.n = n;
     printf("Tamanho do vetor: %d\n", n);
     printf("−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−\n");
     printf("Algoritmo Relógio (seg) CPU (seg)\n");
