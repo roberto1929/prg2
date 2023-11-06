@@ -10,6 +10,7 @@ void imprimir(int *vetor){
 
 int main() {
     int n = 0;
+    int right = 0, left = 0, s,e;
     printf("Entre com o tamanho do vetor: ");
     scanf("%d", &n);
     sort_t sort;
@@ -19,76 +20,87 @@ int main() {
     printf("Algoritmo Relógio (seg) CPU (seg)\n");
     printf("------------------------------------\n");
 
+
     sort.vetor = cria_arranjo(n);
 
-    imprimir(sort.vetor);
+    clock_t start = 0, end;
+    struct timeval inicio, fim;
+
+
+    //insertion sort
+        //CPU
+    comeca(&inicio);
+    insert_sort(&sort);
+    double tempo_cpu = medir_tempo_cpu(start);
+    printf("Inserção   %f      ", tempo_cpu);
+
+        //parede
+    comeca(&inicio);
+    insert_sort(&sort);
+    double tempo_parede = medir_tempo_parede(&inicio);
+    printf("%f\n", tempo_parede);
+
+
+    // selection sort
+    cria_arranjo(n);
+        //CPU
+    comeca(&inicio);
+    selection_sort(&sort);
+    tempo_cpu = medir_tempo_cpu(start);
+    printf("Seleção    %f      ", tempo_cpu);
+
+        //parede
+    comeca(&inicio);
+    selection_sort(&sort);
+    tempo_parede = medir_tempo_parede(&inicio);
+    printf("%f\n", tempo_parede);
+    free(sort.vetor);
+
+
+    // bubble sort
+    cria_arranjo(n);
+        //CPU
+    comeca(&inicio);
     bubble_sort(&sort);
-    printf("Depois de ordenar:\n");
-    imprimir(sort.vetor);
+    tempo_cpu = medir_tempo_cpu(start);
+    printf("Bolha      %f      ",tempo_cpu);
+        //parede
+    comeca(&inicio);
+    bubble_sort(&sort);
+    tempo_parede = medir_tempo_parede(&inicio);
+    printf("%f\n", tempo_parede);
+    free(sort.vetor);
+
+// merge sort
+    cria_arranjo(n);
+//CPU
+    comeca(&inicio);
+    merge_sort(&sort, left, right);
+    tempo_cpu = medir_tempo_cpu(start);
+    printf("Merge      %f      ", tempo_cpu);
+//PAREDE
+    comeca(&inicio);
+    merge_sort(&sort, left, right);
+    tempo_parede = medir_tempo_parede(&inicio);
+    printf("%f\n", tempo_parede);
+    free(sort.vetor);
 
 
-//    clock_t start, end;
-//    double cpu_time_used;
-//    struct timeval inicio, fim;
-//    double wall_time_used;
-//
-//
-//    //insertion sort
-//    //CPU
-//    start = clock();
-//    insert_sort(&sort);
-//    end = clock();
-//    cpu_time_used = ((double )(end - start)) / CLOCKS_PER_SEC;
-//    printf("Inserção   %f      ", cpu_time_used);
-//
-//    //parede
-//    gettimeofday(&inicio, 0);
-//    insert_sort(&sort);
-//    gettimeofday(&fim, 0);
-//    long seg = fim.tv_sec - inicio.tv_sec;
-//    long mseg = fim.tv_usec - inicio.tv_usec;
-//    double tempo_total = seg + mseg * 1e-6;
-//    printf("%f\n", tempo_total);
-//
-//
-//
-//    // selection sort
-//    //CPU
-//    start = clock();
-//    selection_sort(&sort);
-//    end = clock();
-//    cpu_time_used= ((double)(end - start)) / CLOCKS_PER_SEC;
-//    printf("Seleção    %f      ", cpu_time_used);
-//    //parede
-//    gettimeofday(&inicio, 0);
-//    selection_sort(&sort);
-//    gettimeofday(&fim, 0);
-//    seg = fim.tv_sec - inicio.tv_sec;
-//    mseg = fim.tv_usec - inicio.tv_usec;
-//    tempo_total = seg + mseg * 1e-6;
-//    printf("%f\n", tempo_total);
-//
-//
-//
-//    // bubble sort
-//    //CPU
-//    start = clock();
-//    bubble_sort(&sort);
-//    end = clock();
-//    cpu_time_used= ((double)(end - start)) / CLOCKS_PER_SEC;
-//    printf("Bolha      %f      ", cpu_time_used);
-//    //parede
-//    gettimeofday(&inicio, 0);
-//    bubble_sort(&sort);
-//    gettimeofday(&fim, 0);
-//    seg = fim.tv_sec - inicio.tv_sec;
-//    mseg = fim.tv_usec - inicio.tv_usec;
-//    tempo_total = seg + mseg * 1e-6;
-//    printf("%f\n", tempo_total);
-//
-//
-//    printf("------------------------------------\n");
-//    free(sort.vetor);
+    // quick sort
+    cria_arranjo(n);
+//CPU
+    comeca(&inicio);
+    quick_sort(&sort, s, e);
+    tempo_cpu = medir_tempo_cpu(start);
+    printf("Quick      %f      ", tempo_cpu);
+//PAREDE
+    comeca(&inicio);
+    quick_sort(&sort, s, e);
+    tempo_parede = medir_tempo_parede(&inicio);
+    printf("%f\n", tempo_parede);
+
+    printf("------------------------------------\n");
+    free(sort.vetor);
 
 
     return 0;
