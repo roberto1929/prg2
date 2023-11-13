@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(app_textos C)
+project(app_ord_texto C)
 
 set(CMAKE_C_STANDARD 17)
 
@@ -16,6 +16,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(libprg)
 
-add_executable(app_textos main.c
+add_executable(app_ord_texto main.c
 )
-target_link_libraries(app_textos PUBLIC libprg)
+target_link_libraries(app_ord_texto PUBLIC libprg)
