@@ -4,13 +4,14 @@
 #include <string.h>
 
 
+
 typedef struct {
     char *cpf;
     char *nome;
     char *email;
 } pessoa_t;
 
-typedef  struct no{
+typedef  struct{
     char *chave;
     pessoa_t *valor;
     struct no *prox;
@@ -61,10 +62,12 @@ void destruir_no(no_t *no){
     }
 }
 
+
 void destruir_dicionario(dicionario_t *d){
     if(d !=NULL){
         for (int i = 0; i < d->tamanho; ++i) {
             //TODO destruir lista encadeada
+
             destruir_no(d->vetor[i]);
         }
         free(d->vetor);
