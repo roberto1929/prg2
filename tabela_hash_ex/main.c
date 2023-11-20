@@ -67,7 +67,6 @@ void destruir_dicionario(dicionario_t *d){
     if(d !=NULL){
         for (int i = 0; i < d->tamanho; ++i) {
             //TODO destruir lista encadeada
-
             destruir_no(d->vetor[i]);
         }
         free(d->vetor);
@@ -95,23 +94,20 @@ bool inserir(dicionario_t *d, char *chave, pessoa_t *valor){
         return false;
     }
     no->valor = valor;
-    //TODO não está tratando colisões
-    // se houver colisão é necessário usar uma lista encadeada
-    no->prox = NULL;
-    // libera a memória se existir um nó anterior na posição
-    destruir_no(d->vetor[indice]);
+    no->valor = valor;
+    no->prox = d->vetor[indice];
     d->vetor[indice] = no;
     return true;
 }
 
 pessoa_t *buscar(dicionario_t *d, char *chave){
     int indice = hash(chave, d->tamanho);
-    if(d->vetor[indice] != NULL){
-        // TODO Abaixo só pega o primeiro elemento da lista encadeada
-        //é necessário percorrer a lista encadeada e não apenas o primeiro elemento
-        if(strcmp(d->vetor[indice]->chave, chave)== 0){
-            return d->vetor[indice]->valor;
+    no_t *atual = d->vetor[indice];
+    while (atual != NULL) {
+        if(strcmp(atual->chave, chave) == 0){
+            return atual->valor;
         }
+        atual = atual->prox;
     }
     return NULL;
 }
