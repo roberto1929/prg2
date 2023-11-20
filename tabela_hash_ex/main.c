@@ -95,7 +95,7 @@ bool inserir(dicionario_t *d, char *chave, pessoa_t *valor){
     }
     no->valor = valor;
     no->valor = valor;
-    no->prox = d->vetor[indice];
+    no->prox = (struct no *) d->vetor[indice];
     d->vetor[indice] = no;
     return true;
 }
@@ -107,7 +107,7 @@ pessoa_t *buscar(dicionario_t *d, char *chave){
         if(strcmp(atual->chave, chave) == 0){
             return atual->valor;
         }
-        atual = atual->prox;
+        atual = (no_t *) atual->prox;
     }
     return NULL;
 }
