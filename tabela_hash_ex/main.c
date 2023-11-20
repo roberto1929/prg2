@@ -11,7 +11,7 @@ typedef struct {
     char *email;
 } pessoa_t;
 
-typedef  struct{
+typedef  struct no{
     char *chave;
     pessoa_t *valor;
     struct no *prox;
@@ -67,7 +67,12 @@ void destruir_dicionario(dicionario_t *d){
     if(d !=NULL){
         for (int i = 0; i < d->tamanho; ++i) {
             //TODO destruir lista encadeada
-            destruir_no(d->vetor[i]);
+            no_t *atual = d->vetor[i];
+            while(atual != NULL){
+                no_t *proximo = atual->prox;
+                destruir_no(atual);
+                atual = proximo;
+            }
         }
         free(d->vetor);
         free(d);
