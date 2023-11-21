@@ -220,7 +220,8 @@ int main() {
     exibir_dicionario(dicionario);
 
     printf("\n");
-    bool item_removido = remover(dicionario, "123");
+
+    bool item_removido = remover(dicionario, "936");
 
     if(item_removido){
         printf("Item removido com sucesso\n");
