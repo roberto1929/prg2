@@ -182,8 +182,8 @@ int main() {
 
     pessoa_t *p = malloc(sizeof(pessoa_t));
     p->cpf = strdup("123");
-    p->nome = strdup("Juca");
-    p->email = strdup("juca@example.org");
+    p->nome = strdup("Dani");
+    p->email = strdup("cerejo@example.org");
     inserir(dicionario, p->cpf, p);
     imprimir_pessoa(dicionario, "123");
 
@@ -221,7 +221,7 @@ int main() {
 
     printf("\n");
 
-    bool item_removido = remover(dicionario, "936");
+    bool item_removido = remover(dicionario, "123");
 
     if(item_removido){
         printf("Item removido com sucesso\n");
