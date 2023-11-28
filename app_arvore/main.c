@@ -1,31 +1,116 @@
 #include <stdio.h>
 #include <libprg/libprg.h>
-#include <stdlib.h>
+
+clock_t start = 0, end;
+struct timeval inicio, fim;
+
+void imprime_filho_nivel(arvore_t *raiz, int valor, int nivel){
+    if(raiz == NULL){
+        printf("Número não encontrado na árvore\n");
+        return;
+    }
+    if (valor == raiz->valor) {
+        printf("Número encontrado na árvore.\n");
+        if (raiz->esquerda != NULL)
+            printf("Filho a esquerda: %d\n", raiz->esquerda->valor);
+        else
+            printf("Não tem filho à esquerda.\n");
+
+        if (raiz->direita != NULL)
+            printf("Filho a direita: %d\n", raiz->direita->valor);
+        else
+            printf("Não tem filho à direita.\n");
+
+        printf("O nivel na arvore é: %d\n", nivel);
+        return;
+    }
+    if (valor < raiz->valor) {
+        imprime_filho_nivel(raiz->esquerda, valor, nivel + 1);
+    } else {
+        imprime_filho_nivel(raiz->direita, valor, nivel + 1);
+    }
+}
+
+void imprime_arvore(arvore_t *raiz){
+    if(raiz != NULL){
+        imprime_arvore(raiz->esquerda);
+        printf("%d ", raiz->valor);
+        imprime_arvore(raiz->direita);
+    }
+}
+
+int num_aleatorio(int min, int max){
+    return min + rand() % (max - min + 1);
+}
+
+int procura_maior_valor(arvore_t *raiz){
+    if (raiz->direita != NULL){
+        raiz = raiz->direita;
+    }
+    return raiz->valor;
+}
+
+int procura_menor_valor(arvore_t * raiz){
+    if (raiz->esquerda != NULL){
+        raiz = raiz->esquerda;
+    }
+    return raiz->valor;
+}
 
 int main() {
-    clock_t start = 0, end;
-    struct timeval inicio, fim;
+    arvore_t *raiz = NULL;
+    int n = 10;
+    int num, maior_valor, menor_valor, valor_usuario;
 
-        int escolha = 0;
-            arvore_t arvore;
-            int n;
-            double tempo_de_cpu, tempo_parede;
+    //cria minha arvore
+    criar_arvore(n);
 
-            printf("Entre com um n: ");
-            scanf("%d", &n);
-            criar_arvore(n);
+    // tomada de tempo pra inserir valores na árvore
+    comeca(&inicio);
+    for (int i = 0; i < n; ++i) {
+        num = num_aleatorio(50,100);
+        raiz = inserir_valor(raiz,num);
+    }
 
-            printf("Inserir números na árvore de busca binária\n");
-            comeca(&inicio);
-            inserir_valor(&arvore, n);
-            tempo_de_cpu = medir_tempo_cpu(start);
-            printf("Tempo de CPU: %f\n", tempo_de_cpu);
-            free(arvore);
-            comeca(&inicio);
-            inserir_valor(&arvore, n);
-            tempo_parede = medir_tempo_cpu(start);
-            printf("Tempo de parede: %f", tempo_parede);
-            free(arvore);
+    double tempo_de_cpu = medir_tempo_cpu(start);
+    printf("Tempo para inserir números: %f\n", tempo_de_cpu);
 
+    printf("Arvore: ");
+    imprime_arvore(raiz);
+    printf("\n");
+
+    printf("Entre com um valor inteiro: ");
+    scanf("%d", &valor_usuario);
+
+//    //tomada de tempo p/ achar o maior valor da árvore
+//    comeca(&inicio);
+//    maior_valor = procura_maior_valor(raiz);
+//
+//    tempo_de_cpu = medir_tempo_cpu(start);
+//    //printf("Tempo para achar maior valor: %f\n", tempo_de_cpu);
+//
+//    //tomada de tempo p/ achar p menor valor
+//    comeca(&inicio);
+//    menor_valor = procura_menor_valor(raiz);
+//
+//    tempo_de_cpu = medir_tempo_cpu(start);
+//    //printf("Tempo para achar menor valor: %f\n", tempo_de_cpu);
+//
+    comeca(&inicio);
+
+    imprime_filho_nivel(raiz,valor_usuario,1);
+
+    tempo_de_cpu = medir_tempo_cpu(start);
+    printf("Tempo para achar filhos e o nivel na arvore: %f\n", tempo_de_cpu);
+
+
+//    printf("Menor valor da arvore: %d", menor_valor);
+//    printf("\n");
+//    printf("Maior valor da arvore: %d", maior_valor);
+//    printf("\n");
+
+
+
+    destruir_arvore(raiz);
     return 0;
 }
