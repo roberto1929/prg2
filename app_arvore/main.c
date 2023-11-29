@@ -4,6 +4,36 @@
 clock_t start = 0, end;
 struct timeval inicio, fim;
 
+arvore_t *remover_valor(arvore_t *raiz, int valor) {
+    if (raiz == NULL)
+        return raiz;
+
+    if (valor < raiz->valor)
+        raiz->esquerda = remover_valor(raiz->esquerda, valor);
+    else if (valor > raiz->valor)
+        raiz->direita = remover_valor(raiz->direita, valor);
+    else {
+        if (raiz->esquerda == NULL) {
+            no_t *temp = raiz->direita;
+            free(raiz);
+            return temp;
+        } else if (raiz->direita == NULL) {
+            no_t *temp = raiz->esquerda;
+            free(raiz);
+            return temp;
+        }
+
+        arvore_t *temp = raiz->direita;
+        while (temp->esquerda != NULL)
+            temp = temp->esquerda;
+
+        raiz->valor = temp->valor;
+
+        raiz->direita = remover_valor(raiz->direita, temp->valor);
+    }
+    return raiz;
+}
+
 void imprime_filho_nivel(arvore_t *raiz, int valor, int nivel){
     if(raiz == NULL){
         printf("Número não encontrado na árvore\n");
@@ -21,7 +51,7 @@ void imprime_filho_nivel(arvore_t *raiz, int valor, int nivel){
         else
             printf("Não tem filho à direita.\n");
 
-        printf("O nivel na arvore é: %d\n", nivel);
+        printf("O nivel do número encontrado na arvore é: %d\n", nivel);
         return;
     }
     if (valor < raiz->valor) {
@@ -58,9 +88,10 @@ int procura_menor_valor(arvore_t * raiz){
 }
 
 int main() {
+    arvore_t arvore;
     arvore_t *raiz = NULL;
-    int n = 10;
-    int num, maior_valor, menor_valor, valor_usuario;
+    int n = 20;
+    int num, maior_valor, menor_valor, valor_usuario, numero_removido;
 
     //cria minha arvore
     criar_arvore(n);
@@ -82,6 +113,7 @@ int main() {
     printf("Entre com um valor inteiro: ");
     scanf("%d", &valor_usuario);
 
+
 //    //tomada de tempo p/ achar o maior valor da árvore
 //    comeca(&inicio);
 //    maior_valor = procura_maior_valor(raiz);
@@ -100,8 +132,19 @@ int main() {
 
     imprime_filho_nivel(raiz,valor_usuario,1);
 
-    tempo_de_cpu = medir_tempo_cpu(start);
-    printf("Tempo para achar filhos e o nivel na arvore: %f\n", tempo_de_cpu);
+    double tempo_de_parede = medir_tempo_parede(&inicio);
+    printf("Tempo para achar filhos e o nivel na arvore: %f\n", tempo_de_parede);
+
+    printf("Entre com um valor inteiro: ");
+    scanf("%d", &numero_removido);
+
+
+    comeca(&inicio);
+
+    raiz = remover_valor(raiz,numero_removido);
+
+    tempo_de_parede = medir_tempo_parede(&inicio);
+    printf("Tempo para remover na arvore: %f\n", tempo_de_parede);
 
 
 //    printf("Menor valor da arvore: %d", menor_valor);
@@ -109,7 +152,9 @@ int main() {
 //    printf("Maior valor da arvore: %d", maior_valor);
 //    printf("\n");
 
-
+    printf("Arvore após a remoção: ");
+    imprime_arvore(raiz);
+    printf("\n");
 
     destruir_arvore(raiz);
     return 0;
