@@ -4,14 +4,14 @@
 clock_t start = 0, end;
 struct timeval inicio, fim;
 
-arvore_t *remover_valor(arvore_t *raiz, int valor) {
+arvore_t *remover_numero(arvore_t *raiz, int valor) {
     if (raiz == NULL)
         return raiz;
 
     if (valor < raiz->valor)
-        raiz->esquerda = remover_valor(raiz->esquerda, valor);
+        raiz->esquerda = remover_numero(raiz->esquerda, valor);
     else if (valor > raiz->valor)
-        raiz->direita = remover_valor(raiz->direita, valor);
+        raiz->direita = remover_numero(raiz->direita, valor);
     else {
         if (raiz->esquerda == NULL) {
             no_t *temp = raiz->direita;
@@ -29,7 +29,7 @@ arvore_t *remover_valor(arvore_t *raiz, int valor) {
 
         raiz->valor = temp->valor;
 
-        raiz->direita = remover_valor(raiz->direita, temp->valor);
+        raiz->direita = remover_numero(raiz->direita, temp->valor);
     }
     return raiz;
 }
@@ -141,7 +141,7 @@ int main() {
 
     comeca(&inicio);
 
-    raiz = remover_valor(raiz,numero_removido);
+    raiz = remover_numero(raiz,numero_removido);
 
     tempo_de_parede = medir_tempo_parede(&inicio);
     printf("Tempo para remover na arvore: %f\n", tempo_de_parede);
