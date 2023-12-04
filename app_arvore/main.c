@@ -4,85 +4,20 @@
 clock_t start = 0, end;
 struct timeval inicio, fim;
 
-arvore_t *remover_numero(arvore_t *raiz, int valor) {
-    if (raiz == NULL)
-        return raiz;
-
-    if (valor < raiz->valor)
-        raiz->esquerda = remover_numero(raiz->esquerda, valor);
-    else if (valor > raiz->valor)
-        raiz->direita = remover_numero(raiz->direita, valor);
-    else {
-        if (raiz->esquerda == NULL) {
-            no_t *temp = raiz->direita;
-            free(raiz);
-            return temp;
-        } else if (raiz->direita == NULL) {
-            no_t *temp = raiz->esquerda;
-            free(raiz);
-            return temp;
-        }
-
-        arvore_t *temp = raiz->direita;
-        while (temp->esquerda != NULL)
-            temp = temp->esquerda;
-
-        raiz->valor = temp->valor;
-
-        raiz->direita = remover_numero(raiz->direita, temp->valor);
-    }
-    return raiz;
-}
-
-void imprime_filho_nivel(arvore_t *raiz, int valor, int nivel){
-    if(raiz == NULL){
-        printf("Número não encontrado na árvore\n");
-        return;
-    }
-    if (valor == raiz->valor) {
-        printf("Número encontrado na árvore.\n");
-        if (raiz->esquerda != NULL)
-            printf("Filho a esquerda: %d\n", raiz->esquerda->valor);
-        else
-            printf("Não tem filho à esquerda.\n");
-
-        if (raiz->direita != NULL)
-            printf("Filho a direita: %d\n", raiz->direita->valor);
-        else
-            printf("Não tem filho à direita.\n");
-
-        printf("O nivel do número encontrado na arvore é: %d\n", nivel);
-        return;
-    }
-    if (valor < raiz->valor) {
-        imprime_filho_nivel(raiz->esquerda, valor, nivel + 1);
-    } else {
-        imprime_filho_nivel(raiz->direita, valor, nivel + 1);
-    }
-}
-
-void imprime_arvore(arvore_t *raiz){
-    if(raiz != NULL){
-        imprime_arvore(raiz->esquerda);
-        printf("%d ", raiz->valor);
-        imprime_arvore(raiz->direita);
-    }
-}
-
 int num_aleatorio(int min, int max){
     return min + rand() % (max - min + 1);
-}
-
-int procura_maior_valor(arvore_t *raiz){
-    if (raiz->direita != NULL){
-        raiz = raiz->direita;
-    }
-    return raiz->valor;
 }
 
 int procura_menor_valor(arvore_t * raiz){
     if (raiz->esquerda != NULL){
         raiz = raiz->esquerda;
+    }
+    return raiz->valor;
+}
+
+int procura_maior_valor(arvore_t *raiz){
+    if (raiz->direita != NULL){
+        raiz = raiz->direita;
     }
     return raiz->valor;
 }
@@ -110,11 +45,11 @@ int main() {
     imprime_arvore(raiz);
     printf("\n");
 
-    printf("Entre com um valor inteiro: ");
+    printf("Entre com um valor inteiro para verificar se está na árvore: ");
     scanf("%d", &valor_usuario);
 
 
-//    //tomada de tempo p/ achar o maior valor da árvore
+//    //tomada de tempo pra achar o maior valor da árvore
 //    comeca(&inicio);
 //    maior_valor = procura_maior_valor(raiz);
 //
@@ -135,7 +70,7 @@ int main() {
     double tempo_de_parede = medir_tempo_parede(&inicio);
     printf("Tempo para achar filhos e o nivel na arvore: %f\n", tempo_de_parede);
 
-    printf("Entre com um valor inteiro: ");
+    printf("Entre com um valor inteiro para remove-lo da árvore: ");
     scanf("%d", &numero_removido);
 
 
@@ -144,7 +79,7 @@ int main() {
     raiz = remover_numero(raiz,numero_removido);
 
     tempo_de_parede = medir_tempo_parede(&inicio);
-    printf("Tempo para remover na arvore: %f\n", tempo_de_parede);
+    printf("Tempo para remover na árvore: %f\n", tempo_de_parede);
 
 
 //    printf("Menor valor da arvore: %d", menor_valor);
@@ -152,7 +87,7 @@ int main() {
 //    printf("Maior valor da arvore: %d", maior_valor);
 //    printf("\n");
 
-    printf("Arvore após a remoção: ");
+    printf("Árvore após a remoção: ");
     imprime_arvore(raiz);
     printf("\n");
 
