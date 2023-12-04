@@ -53,6 +53,12 @@ int main() {
     imprime_arvore_in_order(raiz);
     printf("\n");
 
+    printf("strict graph{\n");
+    printf("label=\"Árvore de busca binária\";\n");
+    printf("node [shape=\"circle\", color=\"#339966\", style=\"filled\",\n");
+    printf("\tfixedsize=true];\n");
+    imprime_arvore_grafo(raiz);
+    printf("}\n");
 
     destruir_arvore(raiz);
 
