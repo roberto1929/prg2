@@ -42,7 +42,7 @@ int main() {
     printf("Tempo para inserir números: %f\n", tempo_de_cpu);
 
     printf("Arvore: ");
-    imprime_arvore(raiz);
+    imprime_arvore_in_order(raiz);
     printf("\n");
 
     printf("Entre com um valor inteiro para verificar se está na árvore: ");
@@ -88,7 +88,7 @@ int main() {
 //    printf("\n");
 
     printf("Árvore após a remoção: ");
-    imprime_arvore(raiz);
+    imprime_arvore_in_order(raiz);
     printf("\n");
 
     destruir_arvore(raiz);
