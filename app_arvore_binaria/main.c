@@ -1,23 +1,29 @@
 #include <stdio.h>
 #include <libprg/libprg.h>
 
-//int num_aleatorio(int min, int max){
-//    return min + rand() % (max - min + 1);
-//}
+clock_t start = 0, end;
+struct timeval inicio, fim;
+
+
+int num_aleatorio(){
+    return rand() % 10;
+}
 
 int main() {
-    arvore_t arvore;
     arvore_t *raiz = NULL;
-   // int n = 6;
+    int n = 4;
     int num, valor_usuario, numero_removido;
 
     //cria minha arvore
     criar_arvore(n);
 
-    for (int i = 0; i < 1000; ++i) {
-        num = rand() % 10000;
+    comeca(&inicio);
+    for (int i = 0; i < 3; ++i) {
+        num = num_aleatorio();
         raiz = inserir_valor(raiz,num);
     }
+    double tempo_cpu = medir_tempo_cpu(start);
+    printf("Tempo de CPU: %lf\n", tempo_cpu);
 
     printf("Arvore in ordem: ");
     imprime_arvore_in_order(raiz);
@@ -27,17 +33,14 @@ int main() {
     imprime_arvore_pre_order(raiz);
     printf("\n");
 
-//    printf("Arvore pos ordem: ");
-//    imprime_arvore_post_order(raiz);
-//    printf("\n");
+    printf("Arvore pos ordem: ");
+    imprime_arvore_post_order(raiz);
+    printf("\n");
 
-    printf("strict graph{\n");
-    printf("label=\"Árvore de busca binária\";\n");
-    printf("node [shape=\"circle\", color=\"#339966\", style=\"filled\",\n");
-    printf("\tfixedsize=true];\n");
-    imprime_arvore_grafo(raiz);
-    printf("}\n");
-
+    comeca(&inicio);
+    imprimir_texto_grafo(raiz);
+    double tempo_parede = medir_tempo_parede(&inicio);
+    printf("Tempo de parede: %lf\n", tempo_parede);
 
 
     printf("Entre com um valor inteiro para verificar se está na árvore: ");
@@ -52,12 +55,8 @@ int main() {
     imprime_arvore_in_order(raiz);
     printf("\n");
 
-    printf("strict graph{\n");
-    printf("label=\"Árvore de busca binária\";\n");
-    printf("node [shape=\"circle\", color=\"#339966\", style=\"filled\",\n");
-    printf("\tfixedsize=true];\n");
-    imprime_arvore_grafo(raiz);
-    printf("}\n");
+
+    imprimir_texto_grafo(raiz);
 
     destruir_arvore(raiz);
 
