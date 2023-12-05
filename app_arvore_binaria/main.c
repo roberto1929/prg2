@@ -1,22 +1,21 @@
 #include <stdio.h>
 #include <libprg/libprg.h>
 
-int num_aleatorio(int min, int max){
-    return min + rand() % (max - min + 1);
-}
+//int num_aleatorio(int min, int max){
+//    return min + rand() % (max - min + 1);
+//}
 
 int main() {
     arvore_t arvore;
     arvore_t *raiz = NULL;
-    int n = 6;
+   // int n = 6;
     int num, valor_usuario, numero_removido;
 
     //cria minha arvore
     criar_arvore(n);
 
-    // tomada de tempo pra inserir valores na árvore
-    for (int i = 0; i < n; ++i) {
-        num = num_aleatorio(50,100);
+    for (int i = 0; i < 1000; ++i) {
+        num = rand() % 10000;
         raiz = inserir_valor(raiz,num);
     }
 
