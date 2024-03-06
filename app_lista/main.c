@@ -6,117 +6,115 @@ int main() {
     lista_t lista;
     int opcao, tamanho, elemento, posicao;
 
-    // Loop do menu interativo
+    //loop para o menu interativo
     do {
-        printf("\nMenu:\n");
-        printf("1. Criar uma lista povoada\n");
-        printf("2. Inserir um novo número\n");
-        printf("3. Remover um número\n");
-        printf("4. Buscar por um número usando busca linear\n");
-        printf("5. Buscar por um número usando busca binária iterativa\n");
-        printf("6. Buscar por um número usando busca binária recursiva\n");
-        printf("0. Sair\n");
+        printf("\nMenu\n");
+        printf("1- Criar uma lista povoada\n");
+        printf("2- Inserir um novo número\n");
+        printf("3- Remover um número\n");
+        printf("4- Buscar por um número usando busca linear\n");
+        printf("5- Buscar por um número usando busca binária iterativa\n");
+        printf("6- Buscar por um número usando busca binária recursiva\n");
+        printf("0- Sair\n");
 
-        printf("Escolha uma opção: ");
+        printf("Entre com sua opção: ");
         scanf("%d", &opcao);
 
         switch (opcao) {
             case 1:
-                printf("Informe o tamanho da lista: ");
+                printf("Informe o tamanho da lista ");
                 scanf("%d", &tamanho);
-                printf("Deseja que a lista seja ordenada? (1 - Sim, 0 - Não): ");
+                printf("Você deseja que a lista seja ordenada?(1- Sim, 0 - Não");
                 int ordenada;
                 scanf("%d", &ordenada);
                 if (ordenada) {
                     criar_lista(&lista);
-                    povoar_ordenada(&lista);
+                    povoar_ord(&lista);
                 } else {
                     criar_lista(&lista);
-                    povoar_nao_ordenada(&lista);
+                    povoar_nao_ord(&lista);
                 }
                 break;
             case 2:
-                printf("Informe o número a ser inserido: ");
+                printf("Informe o número que vai ser inserido: ");
                 scanf("%d", &elemento);
-                printf("Deseja inserir na lista ordenada? (1 - Sim, 0 - Não): ");
+                printf("Você deseja que a lista seja ordenada?(1- Sim, 0 - Não");
                 int ordenada_inserir;
                 scanf("%d", &ordenada_inserir);
                 if (ordenada_inserir) {
-                    if (inserir_ordenada(&lista, elemento)) {
-                        printf("Número inserido com sucesso!\n");
+                    if (insere_ord(&lista, elemento)) {
+                        printf("Numero inserido\n");
                     } else {
-                        printf("Erro ao inserir o número.\n");
+                        printf("Não foi possível inserir o número\n");
                     }
                 } else {
-                    if (inserir_nao_ord(&lista, elemento)) {
-                        printf("Número inserido com sucesso!\n");
+                    if (insere_nao_ord(&lista, elemento)) {
+                        printf("Numero inserido\n");
                     } else {
-                        printf("Erro ao inserir o número.\n");
+                        printf("Não foi possível inserir o número\n");
                     }
-                }
-                break;
-            case 3:
-                printf("Informe o número a ser removido: ");
-                scanf("%d", &elemento);
-                printf("Deseja remover da lista ordenada? (1 - Sim, 0 - Não): ");
-                int ordenada_remover;
-                scanf("%d", &ordenada_remover);
-                if (ordenada_remover) {
-                    if (remover_ordenada(&lista, elemento)) {
-                        printf("Número removido com sucesso!\n");
+                    break;
+                    case 3:
+                        printf("Informe o número que vai ser removido: ");
+                    scanf("%d", &elemento);
+                    printf("Você deseja que a lista seja ordenada?(1- Sim, 0 - Não");
+                    int ordenada_remover;
+                    scanf("%d", &ordenada_remover);
+                    if (ordenada_remover) {
+                        if (remove_num_ord(&lista, elemento)) {
+                            printf("Numero removido\n");
+                        } else {
+                            printf("Não foi possível remover o número\n");
+                        }
                     } else {
-                        printf("Erro ao remover o número.\n");
-                    }
-                } else {
-                    if (remover_nao_ord(&lista, elemento)) {
-                        printf("Número removido com sucesso!\n");
-                    } else {
-                        printf("Erro ao remover o número.\n");
+                        if (remove_num_nao_ord(&lista, elemento)) {
+                            printf("Numero removido\n");
+                        } else {
+                            printf("Não foi possível remover o número\n");
+                        }
                     }
                 }
                 break;
             case 4:
-                printf("Informe o número a ser buscado: ");
+                printf("Insira o número que quer buscar: ");
                 scanf("%d", &elemento);
                 posicao = busca_linear(&lista, elemento);
-                if (posicao != -1) {
-                    printf("Número encontrado na posição %d.\n", posicao);
+                if(posicao != -1){
+                    printf("Numero encontrado na posição\n");
                 } else {
-                    printf("Número não encontrado na lista.\n");
+                    printf("Numero não encontrado\n");
                 }
-                break;
+                                break;
             case 5:
-                printf("Informe o número a ser buscado: ");
+                printf("Insira o número que quer buscar: ");
                 scanf("%d", &elemento);
-                posicao = busca_binaria_ite(&lista, elemento);
-                if (posicao != -1) {
-                    printf("Número encontrado na posição %d.\n", posicao);
+                posicao = busca_bin_int(&lista, elemento);
+                if(posicao != -1){
+                    printf("Numero encontrado na posição\n");
                 } else {
-                    printf("Número não encontrado na lista.\n");
+                    printf("Numero não encontrado\n");
                 }
                 break;
             case 6:
-                printf("Informe o número a ser buscado: ");
+                printf("Insira o número que quer buscar: ");
                 scanf("%d", &elemento);
-                posicao = busca_binaria_rec(&lista, 0, lista.total - 1, elemento);
-                if (posicao != -1) {
-                    printf("Número encontrado na posição %d.\n", posicao);
+                posicao = busca_bin_rec(&lista,0, lista.total -1, elemento);
+                if(posicao != -1){
+                    printf("Numero encontrado na posição\n");
                 } else {
-                    printf("Número não encontrado na lista.\n");
+                    printf("Numero não encontrado\n");
                 }
                 break;
             case 0:
-                printf("Saindo do programa.\n");
+                printf("Sair do programa\n");
                 break;
+
             default:
-                printf("Opção inválida. Tente novamente.\n");
-                break;
+                printf("Opção inválida tente novamente\n");
         }
 
     } while (opcao != 0);
 
-    // Libere a memória alocada
     libera_memoria(&lista);
-
     return 0;
 }
