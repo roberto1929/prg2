@@ -1,97 +1,128 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <libprg/libprg.h>
-#include <time.h>
 
-int main() {
-    ListaLinear lista;
-    int opcao, n, elemento;
+int main()
+{
+    int escolha = -1;
+    int elemento;
+    char op[2] = {};
+    lista_t lista;
 
-    inicializarLista(&lista, 100); // Tamanho máximo da lista é 100
+    printf("Escolha o que você quer fazer!\n");
 
-    do {
-        printf("MENU:\n");
-        printf("1. Criar uma lista povoada de tamanho n\n");
-        printf("2. Inserir um novo número\n");
-        printf("3. Remover um número\n");
-        printf("4. Buscar por um número usando busca linear\n");
-        printf("5. Buscar por um número usando busca binária iterativa\n");
-        printf("6. Buscar por um número usando busca binária recursiva\n");
-        printf("0. Sair\n");
-        printf("Escolha uma opção: ");
-        scanf("%d", &opcao);
 
-        switch (opcao) {
+    while(escolha != 0){
+        printf("1 - Criar uma lista povoada de tamanho n\n");
+        printf("2 - Inserir um novo número\n");
+        printf("3 - Remover um número\n");
+        printf("4 - Buscar por um número usando busca linear\n");
+        printf("5 - Buscar por um número usando busca binária iterativa\n");
+        printf("6 - Buscar por um número usando busca binária recursiva\n");
+        printf("7 - Irá imprimir a lista\n");
+        printf("Selecione 0 para sair\n");
+        scanf("%d",&escolha);
+
+        switch (escolha) {
             case 1:
-                printf("Digite o tamanho da lista: ");
-                scanf("%d", &n);
-                // Escolha se a lista será ordenada ou não
-                printf("A lista será ordenada (1) ou não ordenada (0)? ");
-                int ordenada;
-                scanf("%d", &ordenada);
-                if (ordenada) {
-                    povoarOrdenada(&lista, n, 1000); // Povoar com números aleatórios de 0 a 999
-                } else {
-                    povoarNaoOrdenada(&lista, n, 1000); // Povoar com números aleatórios de 0 a 999
+            label:
+                printf("Selecione o tamanho do vetor: ");
+                scanf("%d",&lista.tamanho);
+                if(criar(&lista) == 1){
+                    printf("Vetor criado com sucesso!!\n");
+                } else{
+                    printf("O vetor não foi criado!!\n");
+                    goto label;
                 }
+                printf("Ordenada ou não ordenada? OBS: Selecione \"O\" para ordenada e \"N\" para não ordenada: ");
+                scanf("%s",op);
+                if(strcmp(op,"O") == 0){
+                    povoar_ord(&lista);
+                } if(strcmp(op,"N") == 0){
+            povoar_nao_ord(&lista);
+        }
                 break;
+
             case 2:
-                printf("Digite o número a ser inserido: ");
-                scanf("%d", &elemento);
-                if (ordenada) {
-                    inserirOrdenado(&lista, elemento);
-                } else {
-                    inserirNaoOrdenado(&lista, elemento);
-                }
+                printf("Selecione qual número será inserido: ");
+                scanf("%d",&elemento);
+
+                if(strcmp(op,"O") == 0){
+                    if(insere_ord(&lista,elemento) == 1){
+                        printf("Elemento inserido com sucesso!\n");
+                    }else{
+                        printf("Elemento não inserido! Verifique o tamanho do vetor e se ele está cheio e tente novamente.\n");
+                    }
+                } if(strcmp(op,"N") == 0){
+            if(insere_nao_ord(&lista,elemento) == 1){
+                printf("Elemento inserido com sucesso!\n");
+            }else{
+                printf("Elemento não inserido! Verifique o tamanho do vetor e se ele está cheio e tente novamente\n");
+            }
+        }
                 break;
+
             case 3:
-                printf("Digite o número a ser removido: ");
-                scanf("%d", &elemento);
-                if (ordenada) {
-                    removerOrdenado(&lista, elemento);
-                } else {
-                    removerNaoOrdenado(&lista, elemento);
-                }
+                printf("Selecione o número que será removido: ");
+                scanf("%d",&elemento);
+
+                if(strcmp(op,"O") == 0){
+                    if(remove_num_ord(&lista,elemento) == 1){
+                        printf("Elemento removido com sucesso!\n");
+                    }else{
+                        printf("Elemento não removido! Verifique se ele faz parte do vetor e tente novamente!\n");
+                    }
+                } if(strcmp(op,"N") == 0){
+            if(remove_num_nao_ord(&lista,elemento) == 1){
+                printf("Elemento removido com sucesso!\n");
+            }else{
+                printf("Elemento não removido! Verifique se ele faz parte do vetor e tente novamente!\n");
+            }
+        }
                 break;
+
             case 4:
-                printf("Digite o número a ser buscado: ");
-                scanf("%d", &elemento);
-                int resultado = buscaLinear(&lista, elemento);
-                if (resultado != -1) {
-                    printf("Elemento encontrado no índice %d\n", resultado);
-                } else {
-                    printf("Elemento não encontrado na lista.\n");
+                printf("Selecione o número que será buscado: ");
+                scanf("%d",&elemento);
+                if(busca_linear(&lista,elemento) >= 0){
+                    printf("O número %d está na posição %d do vetor!\n",elemento,busca_linear(&lista,elemento));
+                } else{
+                    printf("O número não foi encotrado!\n");
                 }
                 break;
+
             case 5:
-                printf("Digite o número a ser buscado: ");
-                scanf("%d", &elemento);
-                resultado = buscaBinariaIterativa(&lista, elemento);
-                if (resultado != -1) {
-                    printf("Elemento encontrado no índice %d\n", resultado);
-                } else {
-                    printf("Elemento não encontrado na lista.\n");
+                printf("Selecione o número que será buscado: ");
+                scanf("%d",&elemento);
+                busca_bin_int(&lista,elemento);
+
+                if(busca_bin_int(&lista,elemento) >= 0){
+                    printf("O número %d está na posição %d do vetor!\n",elemento,busca_bin_int(&lista,elemento));
+                } else{
+                    printf("O número não foi encotrado!\n");
                 }
+
                 break;
+
             case 6:
-                printf("Digite o número a ser buscado: ");
-                scanf("%d", &elemento);
-                resultado = buscaBinariaRecursiva(&lista, elemento, 0, lista.tamanho - 1);
-                if (resultado != -1) {
-                    printf("Elemento encontrado no índice %d\n", resultado);
-                } else {
-                    printf("Elemento não encontrado na lista.\n");
+                printf("Selecione o número que será buscado: ");
+                scanf("%d",&elemento);
+
+                if( busca_bin_rec(&lista,0,lista.tamanho,elemento) >= 0){
+                    printf("O número %d está na posição %d do vetor!\n", elemento,busca_bin_rec(&lista,0,lista.tamanho,elemento));
+                } else{
+                    printf("O número não foi encotrado!\n");
                 }
                 break;
-            case 0:
-                liberarLista(&lista);
-                break;
-            default:
-                printf("Opção inválida. Tente novamente.\n");
-                break;
+
+            case 7:
+                for(int i = 0; i < lista.total; i++){
+                    printf("%d\n",lista.vetor[i]);
+                }
         }
 
-    } while (opcao != 0);
+
+    }
+
+    libera_memoria(&lista);
 
     return 0;
 }
