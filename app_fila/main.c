@@ -3,8 +3,8 @@
 
 
 int main(void){
-    int tamanho,op, elemento, temp, deq = 0;
-    fila_t fila = {NULL, 0,0,0,0,};
+    int op, elemento, temp, deq = 0;
+    fila_t fila;
 
     printf("Bem vindo ao programa de teste de fila\n");
     while (1){
@@ -12,14 +12,15 @@ int main(void){
         printf("1- Criar uma fila\n");
         printf("2- Inserir um novo elemento;\n");
         printf("3- Remover um elemento\n");
+        printf("4- Exibir fila\n");
         printf("Selecione a opção:");
         scanf("%d", &op);
 
         switch (op) {
             case 1:
                 printf("Entre com o tamanho da fila:");
-                scanf("%d", &tamanho);
-                if(criar_fila(&fila, tamanho) == 0){
+                scanf("%d", &fila.tamanho);
+                if(criar_fila(&fila, fila.tamanho) == 0){
                     printf("Estouro de memoria");
                 };
                 break;
@@ -49,6 +50,19 @@ int main(void){
                     }
                 } else {
                     printf("Fila não foi criada ainda\n");
+                }
+                break;
+            case 4:
+                if (empty(&fila)){
+                    printf("Fila vazia\n");
+
+                } else {
+                    printf("Fila: ");
+                    int i;
+                    for (i = 0; i < fila.total; i++) {
+                        printf("%d ", fila.vetor[(fila.inicio + i) % fila.tamanho]);
+                    }
+                    printf("\n");
                 }
                 break;
             case 0:
