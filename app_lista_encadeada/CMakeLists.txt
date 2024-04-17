@@ -9,8 +9,8 @@ cmake_policy(SET CMP0135 NEW)
 
 FetchContent_Declare(
         libprg
-        #GIT_REPOSITORY https://github.com/roberto1929/libprg.git
-        #GIT_TAG 0.0.1
+        GIT_REPOSITORY https://github.com/roberto1929/libprg
+        GIT_TAG origin/main
         # You can reference a local directory instead
         URL file:///${CMAKE_CURRENT_SOURCE_DIR}/../../libprg
 )
