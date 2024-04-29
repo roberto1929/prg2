@@ -1,6 +1,5 @@
 #include <libprg/libprg.h>
 
-
 int main(){
 
     no_t *no = NULL;
@@ -9,13 +8,15 @@ int main(){
     stacklist_t pilha;
     pilha.size = 0;
 
+
+
 //    adiciona_lista(&lista, &no, 20);
 //    adiciona_lista(&lista, &no, 10);
 //    adiciona_lista(&lista, &no, 2);
 //    adiciona_lista(&lista, &no, 15);
-
-
-
+//
+//
+//
 //    printf("Nós: ");
 //    imprime_no(no);
 //    printf("Tamanho do nó: %d", lista.size);
@@ -34,7 +35,6 @@ int main(){
 //    } else {
 //        printf("Elemento %d não encontrado na lista.\n", alvo);
 //    }
-//
 //    destruir(&no);
 
     adiciona_pilha(&pilha,&no,45);
@@ -53,6 +53,7 @@ int main(){
     remove_pilha(&pilha, &no);
     imprime_no(no);
     printf("\n");
+
     int alvo = 15;
     no_t *resultado = busca_pilha(no, alvo);
 
@@ -115,9 +116,6 @@ int main(){
     } else {
         printf("Elemento %d não encontrado na lista.\n", alvo);
     }
-
-
-
 
     destruir(&no);
 
