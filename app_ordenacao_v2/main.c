@@ -1,14 +1,18 @@
 #include <libprg/libprg.h>
 
-void imprimir(int *vetor){
-    for (int i = 0; i < 10; ++i) {
-        printf("%d ", vetor[i]);
-    }
-    printf("\n");
-}
+
 
 int main() {
 
+    sort_t sort;
+    cria_sort(&sort, 5);
+
+    preencher_sort(&sort, 5);
+
+//    bubble_sort(&sort, true);
+//    insertion_sort(&sort);
+//    selection_sort(&sort, true);
+    imprimir_ord(&sort);
 
     return 0;
 }
