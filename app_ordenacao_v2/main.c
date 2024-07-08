@@ -1,18 +1,58 @@
 #include <libprg/libprg.h>
 
-
-
 int main() {
 
+    int tamanho;
     sort_t sort;
-    cria_sort(&sort, 5);
 
-    preencher_sort(&sort, 5);
+    printf("−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−\n");
+    printf("APP ORDENAÇÃO\n");
+    printf("−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−\n");
+    printf("Entre com o tamanho do vetor: ");
+    scanf("%d", &tamanho);
+    printf("−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−\n");
 
-//    bubble_sort(&sort, true);
-//    insertion_sort(&sort);
-//    selection_sort(&sort, true);
+    cria_sort(&sort, tamanho);
+    printf("Vetor antes da ordenação: ");
+    preencher_sort(&sort, tamanho);
+
     imprimir_ord(&sort);
+    printf("\n");
+
+    printf("−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−\n");
+
+    bubble_sort(&sort, true);
+    printf("Vetor após a ordenação: ");
+    imprimir_ord(&sort);
+    printf("Tamanho do vetor: %d\n", tamanho);
+    printf("−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−\n");
+    free(sort.vetor);
+
+
+    printf("Entre com o tamanho do vetor: ");
+    scanf("%d", &tamanho);
+    cria_sort(&sort, tamanho);
+    printf("Vetor antes da ordenação: ");
+    preencher_sort(&sort, tamanho);
+    insertion_sort(&sort);
+    printf("Vetor após a ordenação: ");
+    imprimir_ord(&sort);
+    printf("Tamanho do vetor: %d\n", tamanho);
+    printf("−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−\n");
+    free(sort.vetor);
+
+
+    printf("Entre com o tamanho do vetor: ");
+    scanf("%d", &tamanho);
+    cria_sort(&sort, tamanho);
+    printf("Vetor antes da ordenação: ");
+    preencher_sort(&sort, tamanho);
+    selection_sort(&sort, true);
+    printf("Vetor após a ordenação: ");
+    imprimir_ord(&sort);
+    printf("Tamanho do vetor: %d\n", tamanho);
+    printf("−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−\n");
+    free(sort.vetor);
 
     return 0;
 }
