@@ -71,6 +71,7 @@ void destruir_dicionario(dicionario_t *d) {
                 destruir_no(atual);
                 atual = proximo;
             }
+            d->vetor[i] = NULL;
         }
         free(d->vetor);
         free(d);
@@ -90,6 +91,7 @@ bool inserir(dicionario_t *d, char *chave, pessoa_t *valor) {
     no_t *no = malloc(sizeof(no_t));
 
     if (no == NULL) {
+        free(no);
         return false;
     }
     no->chave = strdup(chave);
@@ -98,8 +100,14 @@ bool inserir(dicionario_t *d, char *chave, pessoa_t *valor) {
         return false;
     }
     no->valor = valor;
-    no->prox = d->vetor[indice];
-    d->vetor[indice] = no;
+    no->prox = NULL;
+    if(d->vetor[indice] == NULL){
+        d->vetor[indice] = no;
+    } else{
+        no->prox = d->vetor[indice];
+        d->vetor[indice] = no;
+    }
+
     return true;
 }
 
@@ -126,31 +134,25 @@ void imprimir_pessoa(dicionario_t *d, char *chave) {
 
 bool remover(dicionario_t *d, char *chave) {
     int indice = hash(chave, d->tamanho);
-    if(d->vetor[indice] == NULL){
-        return false;
-    }
     no_t *atual = d->vetor[indice];
     no_t *anterior = NULL;
 
-    while(atual != NULL && strcmp(atual->chave,chave)!= 0){
+    while(atual != NULL){
+        if(strcmp(atual->chave,chave) == 0){
+            if(anterior == NULL){
+                d->vetor[indice] = atual->prox;
+                destruir_no(atual);
+                return true;
+            }else{
+                anterior->prox = atual->prox;
+                destruir_no(atual);
+                return true;
+            }
+        }
         anterior = atual;
         atual = atual->prox;
     }
-
-    if(atual == NULL){
-        return false;
-    }
-
-    if(anterior == NULL){
-        d->vetor[indice] = atual->prox;
-    } else {
-        anterior->prox = atual->prox;
-    }
-
-    destruir_no(atual);
-
-    return true;
-
+    return false;
 }
 
 void exibir_dicionario(dicionario_t *d){
@@ -215,6 +217,13 @@ int main() {
     inserir(dicionario, p->cpf, p);
     imprimir_pessoa(dicionario, "789");
 
+    p = malloc(sizeof(pessoa_t));
+    p->cpf = strdup("481");
+    p->nome = strdup("Mirella");
+    p->email = strdup("mirella@example.org");
+    inserir(dicionario, p->cpf, p);
+    imprimir_pessoa(dicionario, "481");
+
     printf("\n");
 
     exibir_dicionario(dicionario);
@@ -223,12 +232,50 @@ int main() {
 
     bool item_removido = remover(dicionario, "123");
 
+
     if(item_removido){
         printf("Item removido com sucesso\n");
     } else{
         printf("Não foi encontrado, não foi possível remover\n");
     }
     printf("\n");
+
+    item_removido = remover(dicionario, "481");
+
+    if(item_removido){
+        printf("Item removido com sucesso\n");
+    } else{
+        printf("Não foi encontrado, não foi possível remover\n");
+    }
+    printf("\n");
+
+    item_removido = remover(dicionario, "789");
+
+    if(item_removido){
+        printf("Item removido com sucesso\n");
+    } else{
+        printf("Não foi encontrado, não foi possível remover\n");
+    }
+    printf("\n");
+
+    item_removido = remover(dicionario, "781");
+
+    if(item_removido){
+        printf("Item removido com sucesso\n");
+    } else{
+        printf("Não foi encontrado, não foi possível remover\n");
+    }
+    printf("\n");
+
+    item_removido = remover(dicionario, "321");
+
+    if(item_removido){
+        printf("Item removido com sucesso\n");
+    } else{
+        printf("Não foi encontrado, não foi possível remover\n");
+    }
+    printf("\n");
+
 
     exibir_dicionario(dicionario);
 

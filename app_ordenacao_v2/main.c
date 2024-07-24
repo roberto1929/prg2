@@ -20,7 +20,7 @@ int main() {
     imprimir_ord(&sort);
 
     printf("−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−\n");
-    printf("Bubble:\n");
+    printf("Bubble sort:\n");
     comecar = clock();
     inicio(&start);
     bubble_sort(&sort, true);
@@ -30,7 +30,7 @@ int main() {
     printf("Tempo de relógio de parede: %f\n", finaliza(&start));
     printf("−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−\n");
 
-    printf("Insertion:\n");
+    printf("Insertion sort:\n");
     comecar = clock();
     inicio(&start);
     insertion_sort(&sort);
@@ -40,7 +40,7 @@ int main() {
     printf("Tempo de relógio de parede: %f\n", finaliza(&start));
     printf("−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−\n");
 
-    printf("Selection:\n");
+    printf("Selection sort:\n");
     comecar = clock();
     inicio(&start);
     selection_sort(&sort, true);
@@ -50,7 +50,7 @@ int main() {
     printf("Tempo de relógio de parede: %f\n", finaliza(&start));
     printf("−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−\n");
 
-    printf("Merge:\n");
+    printf("Merge sort:\n");
     comecar = clock();
     inicio(&start);
     int esquerda = 0;
